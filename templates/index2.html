@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traducteur</title>
+<style>
+    body {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 15px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .translation-result {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .translation-result p {
+        margin: 0;
+    }
+</style>
+</head>
+<body>
+    <h1>Traducteur</h1>
+
+    <form action="/translate_lang" method="post">
+        <label for="sentence">Phrase à traduire:</label><br>
+        <textarea id="sentence" name="sentence" rows="4" cols="50"></textarea><br><br>
+
+        <label for="code">Langue cible:</label>
+        <select id="code" name="code">
+            {% for language in languages %}
+                <option value="{{ language.code }}" {% if language_selected == language.code %}selected{% endif %}>{{ language.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="submit" value="Traduire">
+    </form>
+
+    {% if sentence and translated_res %}
+        <h2>Résultat de la traduction:</h2>
+        <p>Phrase originale: {{ sentence }}</p>
+        <p>Traduction: {{ translated_res }}</p>
+    {% endif %}
+
+    <form action="/reset_translation" method="post">
+        <input type="submit" value="Réinitialiser">
+    </form>
+</body>
+</html>
