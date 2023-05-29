@@ -2,7 +2,7 @@
 
 # Project Name: Flask Translator App
 
-# Overview:
+## Overview:
 The Flask Translator App is a web application that allows users to translate sentences from English to various languages using the Google Translate API. It is built using the Flask framework in Python.
 
 ## Project Description:
